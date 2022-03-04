@@ -2,14 +2,6 @@ team = []
 sim = [[0] * 3 for x in range(6)]
 
 
-def check():
-    for i in range(6):
-        for j in range(3):
-            if team[i][j] != sim[i][j]:
-                return False
-    return True
-
-
 def dfs(a, b):
     if a == 5:
         for i in range(6):
