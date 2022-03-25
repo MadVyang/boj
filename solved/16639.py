@@ -6,7 +6,6 @@ exp = input()
 nums = [int(exp[i]) for i in range(n) if i % 2 == 0]
 ops = [exp[i] for i in range(n) if i % 2 == 1]
 n = n//2+1
-ps = [[False]*n for _ in range(n)]
 
 
 def solve():
