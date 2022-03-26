@@ -21,28 +21,26 @@ def check():
     return True
 
 
-def dfs(row, count, mcount):
-    if count > 3:
-        return math.inf
-    if count == mcount:
-        if check():
-            return count
-        return math.inf
-    mn = math.inf
+mn = math.inf
+
+
+def dfs(row, count):
+    global mn
+    if check():
+        mn = min(count, mn)
+    if count == 3:
+        return
     for i in range(row, h+1):
         for j in range(1, n):
             if ladder[i][j]:
                 continue
             if not ladder[i][j-1] and not ladder[i][j+1]:
                 ladder[i][j] = True
-                mn = min(mn, dfs(i, count+1, mcount))
+                dfs(i, count+1)
                 ladder[i][j] = False
-    return mn
 
 
-ans = math.inf
-for i in range(0, 4):
-    ans = min(ans, dfs(1, 0, i))
-if ans == math.inf:
-    ans = -1
-print(ans)
+dfs(1, 0)
+if mn == math.inf:
+    mn = -1
+print(mn)
