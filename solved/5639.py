@@ -1,27 +1,51 @@
 import sys
 
 
-arr = [0]*10001
+sys.setrecursionlimit(10**6)
+
+class Node:
+    def __init__(self):
+        self.v = 0
+        self.left = None
+        self.right = None
+
 
 nums = [int(x) for x in sys.stdin.readlines()]
 
 
-pos = 0
-
-
-def get(cur):
-    global pos
-    arr[cur] = nums[pos]
-    print(arr[cur], cur, pos)
-    pos += 1
-    if pos == len(nums):
+def solve(root, start, end):
+    if start >= len(nums):
         return
-    if arr[cur] > nums[pos]:
-        a = get(cur*2)
-    else:
-        get(cur*2+1)
+    root.v = nums[start]
+    if start >= end:
+        return
+
+    left = start
+    for i in range(start+1, end+1):
+        if nums[i] < root.v:
+            left = i
+
+    root.left = Node()
+    root.right = Node()
+    if left > start:
+        solve(root.left, start+1, left)
+    if left < end:
+        solve(root.right, left+1, end)
 
 
-get(1)
+root = Node()
+solve(root, 0, len(nums)-1)
 
-print(arr[1:pos])
+
+# print(arr[1:len(nums*5)])
+
+
+def traverse(root):
+    if not root or root.v == 0:
+        return
+    traverse(root.left)
+    traverse(root.right)
+    print(root.v)
+
+
+traverse(root)
