@@ -10,7 +10,7 @@ while q:
     if i+u <= f and i+u not in vis:
         vis.add(i+u)
         q.append((i+u, n+1))
-    if i-d >= 0 and i-d not in vis:
+    if i-d >= 1 and i-d not in vis:
         vis.add(i-d)
         q.append((i-d, n+1))
 
